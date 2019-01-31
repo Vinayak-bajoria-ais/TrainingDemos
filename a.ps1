@@ -1,4 +1,6 @@
-﻿try
+﻿function divisionp()
+{
+try
 {
 "enter the first integer"
 [int]$a= Read-Host
@@ -31,3 +33,6 @@ catch
 {
 Write-Host $_.Exception.Message
 }
+}
+
+Divisionp
