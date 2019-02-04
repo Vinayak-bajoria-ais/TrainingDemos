@@ -8,6 +8,9 @@ namespace VBBinarySearchTree
 {
     class BST
     {
+        public static int num;
+        public static int leftnum=-1;
+        public static int rightnum=-1;
         int data;
         BST left;
         BST right;
@@ -107,6 +110,140 @@ namespace VBBinarySearchTree
             }
         }
 
+
+        public void BFS()
+        {
+            Console.WriteLine("this is BFS");
+            Queue bfsq = new Queue();
+            bfsq.Enqueue(root.data);
+            num = bfsq.Dequeue();
+            
+            while(Queue.flag != true)
+            {
+                
+                Tree_search_inorder(root);
+                if (leftnum != -1)
+                {
+                    bfsq.Enqueue(leftnum);
+                }
+                
+                if(rightnum != -1)
+                {
+                    bfsq.Enqueue(rightnum);
+                }
+                //Console.WriteLine("the queue befre deletion");
+                bfsq.Display();
+                num = bfsq.Dequeue();
+                //Console.WriteLine("the queue afeter deletion");
+               // bfsq.Display();
+                
+            }
+
+        }
+
+        public void Tree_search_inorder(BST iterator)
+        {
+            if(iterator!= null)
+            {
+                Tree_search_inorder(iterator.left);
+                if (iterator.data == num)
+                {
+                    if (iterator.left != null)
+                    {
+                        leftnum = iterator.left.data;
+                    }
+                    else
+                    {
+                        leftnum = -1;
+                    }
+                    if (iterator.right != null)
+                    {
+                        rightnum = iterator.right.data;
+                    }
+                    else
+                    {
+                        rightnum = -1;
+                    }
+                    return;
+                }
+                Tree_search_inorder(iterator.right);
+
+            }
+        }
+
+        
+
+    }
+
+    class Queue
+    {
+        public static bool flag = false;
+        int data;
+        Queue next;
+
+        Queue start = null;
+
+        public void Enqueue(int data)
+        {
+            Queue newnode = new Queue();
+            newnode.next = null;
+            newnode.data = data;
+            if(start== null)
+            {
+                start = newnode;
+                return;
+            }
+            else
+            {
+                Queue iterator = start;
+                while(iterator.next!= null)
+                {
+                    iterator = iterator.next;
+                }
+                iterator.next = newnode;
+                newnode.next = null;
+                return;
+            }
+        }
+
+        public int Dequeue()
+        {
+            if(start== null)
+            {
+               // Console.WriteLine("the queue is empty");
+                flag = true;
+                return -1;
+            }
+            else
+            {
+                Queue deletionnode = start;
+                start = start.next;
+                deletionnode.next = null;
+                //Console.WriteLine("value being deleted= " + deletionnode.data);
+                return deletionnode.data;
+            }
+        }
+
+        public void Display()
+        {
+            if(start== null)
+            {
+               // Console.WriteLine("the queue is empty");
+            }
+            else
+            {
+                Queue iterator = start;
+                while(iterator.next!= null)
+                {
+                    Console.Write("value= " + iterator.data + "\t");
+                    iterator = iterator.next;
+                }
+                Console.Write("value= " + iterator.data + "\t");
+                return;
+            }
+        }
+
+
     }
 
     class Example
@@ -123,6 +260,7 @@ namespace VBBinarySearchTree
             bst1.inserting_node(2);
             bst1.inserting_node(3);
             bst1.traversing_options();
+            bst1.BFS();
             Console.ReadKey();
 
         }
