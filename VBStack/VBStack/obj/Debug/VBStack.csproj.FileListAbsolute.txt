@@ -1,0 +1,7 @@
+C:\Users\Vinayak.Bajoria\source\repos\VBStack\VBStack\obj\Debug\VBStack.csprojAssemblyReference.cache
+C:\Users\Vinayak.Bajoria\source\repos\VBStack\VBStack\obj\Debug\VBStack.csproj.CoreCompileInputs.cache
+C:\Users\Vinayak.Bajoria\source\repos\VBStack\VBStack\bin\Debug\VBStack.exe.config
+C:\Users\Vinayak.Bajoria\source\repos\VBStack\VBStack\bin\Debug\VBStack.exe
+C:\Users\Vinayak.Bajoria\source\repos\VBStack\VBStack\bin\Debug\VBStack.pdb
+C:\Users\Vinayak.Bajoria\source\repos\VBStack\VBStack\obj\Debug\VBStack.exe
+C:\Users\Vinayak.Bajoria\source\repos\VBStack\VBStack\obj\Debug\VBStack.pdb
