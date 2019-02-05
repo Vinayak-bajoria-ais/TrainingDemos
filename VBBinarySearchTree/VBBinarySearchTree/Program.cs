@@ -69,10 +69,15 @@ namespace VBBinarySearchTree
             }
             else
             {
+                Console.WriteLine();
                 Console.WriteLine(" we are traversing tree in all possible manners");
                 Console.WriteLine("this is inorder traversal");
+                Console.WriteLine();
+                Console.WriteLine();
                 inorder_traversal(root);
                 Console.WriteLine("this is preorder traversal");
+                Console.WriteLine();
+                Console.WriteLine();
                 preorder_traversal(root);
                 Console.WriteLine("this is postorder traversal");
                 postorder_traversal(root);
@@ -113,6 +118,9 @@ namespace VBBinarySearchTree
 
         public void BFS()
         {
+            //the following BFS traversal makes use of Queue to traverse the tree
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("this is BFS");
             Queue bfsq = new Queue();
             bfsq.Enqueue(root.data);
@@ -131,18 +139,51 @@ namespace VBBinarySearchTree
                 {
                     bfsq.Enqueue(rightnum);
                 }
-                //Console.WriteLine("the queue befre deletion");
+                
                 bfsq.Display();
                 num = bfsq.Dequeue();
-                //Console.WriteLine("the queue afeter deletion");
-               // bfsq.Display();
+                
                 
             }
 
         }
 
+        public void DFS()
+        {
+            // the DFS uses the stack to treaverse the tree
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("this is DFS");
+            Stack dfsq = new Stack();
+            dfsq.Push(root.data);
+            num = dfsq.Pop();
+
+            while (Stack.flag != true)
+            {
+
+                Tree_search_inorder(root);
+                if (leftnum != -1)
+                {
+                    dfsq.Push(leftnum);
+                }
+
+                if (rightnum != -1)
+                {
+                    dfsq.Push(rightnum);
+                }
+                num = dfsq.Pop();
+               
+
+            }
+        }
+
         public void Tree_search_inorder(BST iterator)
         {
+            /*
+             *this function searches for a node in tree by matching the data
+            if found it sees its left and right child
+            if it doesn't have either of the children the correspondingly -1 id filled as value
+             */
             if(iterator!= null)
             {
                 Tree_search_inorder(iterator.left);
@@ -174,6 +215,79 @@ namespace VBBinarySearchTree
         
 
     }
+
+    class Stack
+    {
+        int data;
+        Stack next;
+        public static bool flag = false;
+
+        public Stack start = null;
+
+
+        public void Push(int data)
+        {
+            //this is to push a data in the stack
+            Stack s = new Stack();
+            s.data = data;
+            s.next = null;
+
+            if (start == null)
+            {
+                start = s;
+            }
+            else
+            {
+                s.next = start;
+                start = s;
+            }
+            return;
+        }
+
+        public int  Pop()
+        {
+            //this is to pop the number out of the stack
+            if (start == null)
+            {
+                flag = true;
+                return -1;
+            }
+            else
+            {
+                
+                Console.Write("value= " + start.data + "\t");
+                int data = start.data;
+                Stack s = start.next;
+                start.next = null;
+                start = s;
+                return data;
+            }
+
+        }
+
+        public void Display()
+        {
+            if (start != null)
+            {
+                Console.WriteLine("this is the stack at present");
+                Stack s = start;
+                while (s.next != null)
+                {
+                    Console.WriteLine("data= " + s.data);
+                }
+                Console.WriteLine("data= " + s.data);
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("the stack is empty");
+            }
+        }
+
+    }
+
+
+
 
     class Queue
     {
@@ -250,8 +364,9 @@ namespace VBBinarySearchTree
     {
         static void Main(string[] args)
         {
+            //create a new tree by inserting the nodes
             BST bst1 = new BST();
-            bst1.traversing_options();
+            
             bst1.inserting_node(5);
             bst1.inserting_node(7);
             bst1.inserting_node(8);
@@ -259,8 +374,12 @@ namespace VBBinarySearchTree
             bst1.inserting_node(14);
             bst1.inserting_node(2);
             bst1.inserting_node(3);
+            //you can traverse the tree in three possible manners
             bst1.traversing_options();
+            //if you want to traverse in BFS manner
             bst1.BFS();
+            //if you want to traverse in DFS manner
+            bst1.DFS();
             Console.ReadKey();
 
         }
